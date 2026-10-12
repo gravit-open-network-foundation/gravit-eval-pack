@@ -1,0 +1,30 @@
+{
+ "engine": "gravit-open-network-foundation/gravit-grover (pinned commit)",
+ "sybil_10x": {
+  "confidence_false_final": 0.0125926417736,
+  "confidence_true_final": 0.987407358226,
+  "nodes_honest": 100,
+  "nodes_sybil": 1000,
+  "rounds": 30,
+  "sybil_stake_share_round_9": 6.45361680903e-06
+ },
+ "theta_calibration": {
+  "at_theta": {
+   "fn": 124,
+   "fp": 110,
+   "fpr": 0.0733333333333,
+   "theta": 0.73,
+   "tn": 1390,
+   "tp": 1376,
+   "tpr": 0.917333333333
+  },
+  "merkle_root": "sha256:370326aa26d4cf7e5c87fa66e9809e6eeb451a29697ee7c9117b60d5599ac25d",
+  "roc_auc": 0.856355111111,
+  "seed": 20261011,
+  "youden": {
+   "max_j": 0.844,
+   "theta_max": 0.78,
+   "theta_min": 0.11
+  }
+ }
+}

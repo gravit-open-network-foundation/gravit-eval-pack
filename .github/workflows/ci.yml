@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: One command
+        run: make eval PYTHON=python
+      - name: Committed results are exactly what the code computes
+        run: git diff --exit-code results/ BENCHMARK.md
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and run the container
+        run: docker build -t gravit-eval . && docker run --rm gravit-eval | tail -3
