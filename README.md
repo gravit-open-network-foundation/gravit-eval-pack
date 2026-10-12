@@ -15,7 +15,7 @@ docker build -t gravit-eval . && docker run --rm gravit-eval
 
 1. **Verifier conformance.** All 40 golden vectors of the
    [Gravit Verifier](https://github.com/gravit-open-network-foundation/verifier) v0.5.0 (the
-   reference implementation of VEDS-00 / GEVP-07) are replayed and compared byte for byte,
+   reference implementation of VEDS-00 / GEVP) are replayed and compared byte for byte,
    including each content-addressed `decision_id`.
 2. **Adversarial benchmark.** The same vectors grouped by attack class: aggregation laundering
    (weak evidence presented as a fact), Sybil and non-independent sources, forged, tampered or
@@ -38,7 +38,7 @@ fails if a single byte differs; a second CI job builds and runs the Docker image
   the error rates are flat over a wide range of theta. See BENCHMARK.md §3 and the technical note.
 
 See also: [TECHNICAL_NOTE.md](TECHNICAL_NOTE.md) · IETF Internet-Drafts
-[draft-gravit-gevp-07](https://datatracker.ietf.org/doc/draft-gravit-gevp/07/) and
+[draft-gravit-gevp-08](https://datatracker.ietf.org/doc/draft-gravit-gevp/08/) and
 [draft-gravit-verifiable-epistemic-decision-00](https://datatracker.ietf.org/doc/draft-gravit-verifiable-epistemic-decision/00/)
 (individual submissions, not endorsed by the IETF).
 
