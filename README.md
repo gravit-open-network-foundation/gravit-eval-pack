@@ -7,7 +7,7 @@ versions, runs it, and prints every result. Nothing in the results was typed by 
 ```bash
 git clone https://github.com/gravit-open-network-foundation/gravit-eval-pack
 cd gravit-eval-pack
-make eval                    # Python ≥ 3.10; or:
+make eval                    # Python ≥ 3.10 (picked automatically if installed); or:
 docker build -t gravit-eval . && docker run --rm gravit-eval
 ```
 
