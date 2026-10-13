@@ -1,7 +1,7 @@
 """
 Gravit evaluation pack: one command, every number computed here.
 
-1. Verifier conformance: replay all 40 golden vectors of the public Gravit
+1. Verifier conformance: replay all golden vectors of the public Gravit
    Verifier (pinned tag) and compare every decision record byte for byte.
 2. Adversarial benchmark: the same vectors grouped by attack class - what the
    attacker claims, what the verifier decides, and whether the claim was refused.
@@ -63,7 +63,15 @@ CLASSES = {
     "high_impact_missing_hash": ("Provenance", "high-impact decision without integrity hash"),
     "high_impact_ok": ("Provenance", "high-impact decision with full provenance"),
     "not_high_impact_missing_hash_ok": ("Provenance", "low-impact decision, hash not required"),
+    "result_false_contradicts": ("Signed verdict", "one source signs that its check failed"),
+    "result_null_is_no_support": ("Signed verdict", "both sources sign no verdict"),
+    "result_one_true_one_null": ("Signed verdict", "one supporting source, one without verdict"),
+    "result_false_outvoted_still_blocks": ("Signed verdict", "three supporting sources, one signed failure"),
+    "result_false_unsigned_not_counted": ("Signed verdict", "unsigned 'failed' record cannot block"),
+    "result_false_no_registry": ("Signed verdict", "signed failure, no registry"),
+    "result_false_modest_claim": ("Signed verdict", "signed failure, modest claim"),
 }
+VERSION = "v0.6.0"  # must match VERIFIER_TAG in the Makefile
 
 
 def verifier_vectors() -> dict:
@@ -90,7 +98,7 @@ def verifier_vectors() -> dict:
             "unjustified_claim_refused": v["claimed_state"] == "Verified Fact" and got["final_epistemic_state"] != "Verified Fact",
             "reproduced_byte_for_byte": got == v["expected"], "decision_id": got["decision_id"],
         })
-    return {"verifier": "gravit-open-network-foundation/verifier v0.5.0", "vectors": rows}
+    return {"verifier": f"gravit-open-network-foundation/verifier {VERSION}", "vectors": rows}
 
 
 def grover() -> dict:
@@ -132,7 +140,7 @@ def write_report(v: dict, g: dict) -> None:
         "",
         "## 1. Verifier conformance",
         "",
-        f"**{sum(r['reproduced_byte_for_byte'] for r in rows)} of {len(rows)}** golden vectors of the Gravit Verifier v0.5.0 "
+        f"**{sum(r['reproduced_byte_for_byte'] for r in rows)} of {len(rows)}** golden vectors of the Gravit Verifier {VERSION} "
         "reproduced byte for byte (decision records, including content-addressed `decision_id`).",
         "",
         "## 2. Adversarial benchmark",
