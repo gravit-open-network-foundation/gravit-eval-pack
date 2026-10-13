@@ -51,7 +51,7 @@ identical `decision_id` on any machine and in both implementations.
 - **Correction (13 Oct 2026).** The earlier version of this note reported "27 of 27 refused" for
   verifier v0.5.0. That was true for the cases tested, but the cases did not cover the signed
   `result` field, and v0.5.0 ignored it: a record signed "check failed" still counted towards a
-  Verified Fact. An external reviewer found this with a reproduction. Verifier v0.6.0 applies the
+  Verified Fact. Iman Schrock (EMILIA Protocol) found this with a reproduction. Verifier v0.6.0 applies the
   signed result (`CANON-RES-012`); the five new attack cases are in the "Signed verdict" class.
 - **Consensus under a 10x Sybil attack** (100 honest versus 1000 Sybil nodes, 30 rounds): the network
   confidence in the true claim reaches 0.9874, and the Sybil stake share falls below 0.001 % by round 9.
