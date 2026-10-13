@@ -42,11 +42,17 @@ identical `decision_id` on any machine and in both implementations.
 
 ## 3. Results (from `make eval`)
 
-- **Conformance:** 40 of 40 golden vectors reproduced byte for byte.
-- **Adversarial benchmark:** 27 cases in which a Verified Fact is claimed without justification —
+- **Conformance:** 47 of 47 golden vectors of verifier v0.6.0 reproduced byte for byte.
+- **Adversarial benchmark:** 32 cases in which a Verified Fact is claimed without justification —
   aggregation laundering, Sybil or non-independent sources, forged, tampered or replayed
-  signatures, revoked keys, stale or malformed timestamps, missing provenance, missing trust root.
-  The verifier refused all 27, and granted the claim in every legitimate baseline and boundary case.
+  signatures, revoked keys, stale or malformed timestamps, missing provenance, missing trust root,
+  and records whose signed verdict is "failed" or "no verdict".
+  The verifier refused all 32, and granted the claim in every legitimate baseline and boundary case.
+- **Correction (13 Oct 2026).** The earlier version of this note reported "27 of 27 refused" for
+  verifier v0.5.0. That was true for the cases tested, but the cases did not cover the signed
+  `result` field, and v0.5.0 ignored it: a record signed "check failed" still counted towards a
+  Verified Fact. An external reviewer found this with a reproduction. Verifier v0.6.0 applies the
+  signed result (`CANON-RES-012`); the five new attack cases are in the "Signed verdict" class.
 - **Consensus under a 10x Sybil attack** (100 honest versus 1000 Sybil nodes, 30 rounds): the network
   confidence in the true claim reaches 0.9874, and the Sybil stake share falls below 0.001 % by round 9.
 - **theta_critical calibration** (3000 claims): at theta = 0.73, TPR 91.7 %, FPR 7.3 %, ROC AUC 0.856.

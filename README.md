@@ -13,8 +13,8 @@ docker build -t gravit-eval . && docker run --rm gravit-eval
 
 ## What it checks
 
-1. **Verifier conformance.** All 40 golden vectors of the
-   [Gravit Verifier](https://github.com/gravit-open-network-foundation/verifier) v0.5.0 (the
+1. **Verifier conformance.** All 47 golden vectors of the
+   [Gravit Verifier](https://github.com/gravit-open-network-foundation/verifier) v0.6.0 (the
    reference implementation of VEDS-00 / GEVP) are replayed and compared byte for byte,
    including each content-addressed `decision_id`.
 2. **Adversarial benchmark.** The same vectors grouped by attack class: aggregation laundering
