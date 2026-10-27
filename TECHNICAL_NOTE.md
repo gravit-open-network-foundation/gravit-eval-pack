@@ -42,17 +42,23 @@ identical `decision_id` on any machine and in both implementations.
 
 ## 3. Results (from `make eval`)
 
-- **Conformance:** 47 of 47 golden vectors of verifier v0.6.0 reproduced byte for byte.
-- **Adversarial benchmark:** 32 cases in which a Verified Fact is claimed without justification —
+- **Conformance:** 54 of 54 golden vectors of verifier v0.7.0 reproduced byte for byte.
+- **Adversarial benchmark:** 34 cases in which a Verified Fact is claimed without justification —
   aggregation laundering, Sybil or non-independent sources, forged, tampered or replayed
   signatures, revoked keys, stale or malformed timestamps, missing provenance, missing trust root,
-  and records whose signed verdict is "failed" or "no verdict".
-  The verifier refused all 32, and granted the claim in every legitimate baseline and boundary case.
+  records whose signed verdict is "failed" or "no verdict", and records about different content.
+  The verifier refused all 34, and granted the claim in every legitimate baseline and boundary case.
 - **Correction (13 Oct 2026).** The earlier version of this note reported "27 of 27 refused" for
   verifier v0.5.0. That was true for the cases tested, but the cases did not cover the signed
   `result` field, and v0.5.0 ignored it: a record signed "check failed" still counted towards a
   Verified Fact. Iman Schrock (EMILIA Protocol) found this with a reproduction. Verifier v0.6.0 applies the
   signed result (`CANON-RES-012`); the five new attack cases are in the "Signed verdict" class.
+- **Verifier v0.7.0 (released 25 Oct 2026, replayed here 27 Oct).** An external review of v0.6.0 found four points, all fixed in v0.7.0:
+  Records counted towards a Verified Fact must share one `integrity_hash` (`CANON-SIG-011`); excluded
+  Records never count; `decision_id` uses RFC 8785 (JCS), so every id changed; a `theta` that is not a
+  number makes the Record malformed. Seven new vectors (classes "One content", "Excluded records",
+  "Malformed input"). One earlier case changed outcome: `not_high_impact_missing_hash_ok` signs two
+  different hashes and is now a Probabilistic Assessment, so it counts as a refused attack.
 - **Consensus under a 10x Sybil attack** (100 honest versus 1000 Sybil nodes, 30 rounds): the network
   confidence in the true claim reaches 0.9874, and the Sybil stake share falls below 0.001 % by round 9.
 - **theta_critical calibration** (3000 claims): at theta = 0.73, TPR 91.7 %, FPR 7.3 %, ROC AUC 0.856.
