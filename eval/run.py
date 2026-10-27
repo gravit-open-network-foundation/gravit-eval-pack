@@ -62,7 +62,7 @@ CLASSES = {
     "freshness_policy_incomplete_demotes": ("Freshness", "incomplete freshness policy"),
     "high_impact_missing_hash": ("Provenance", "high-impact decision without integrity hash"),
     "high_impact_ok": ("Provenance", "high-impact decision with full provenance"),
-    "not_high_impact_missing_hash_ok": ("Provenance", "low-impact decision, hash not required"),
+    "not_high_impact_missing_hash_ok": ("Provenance", "low-impact decision, two different content hashes"),
     "result_false_contradicts": ("Signed verdict", "one source signs that its check failed"),
     "result_null_is_no_support": ("Signed verdict", "both sources sign no verdict"),
     "result_one_true_one_null": ("Signed verdict", "one supporting source, one without verdict"),
@@ -70,8 +70,15 @@ CLASSES = {
     "result_false_unsigned_not_counted": ("Signed verdict", "unsigned 'failed' record cannot block"),
     "result_false_no_registry": ("Signed verdict", "signed failure, no registry"),
     "result_false_modest_claim": ("Signed verdict", "signed failure, modest claim"),
+    "integrity_hash_mismatch_caps": ("One content", "two sources sign different content hashes"),
+    "excluded_low_theta_does_not_block": ("Excluded records", "excluded low-theta record cannot block"),
+    "excluded_shared_provenance_does_not_merge": ("Excluded records", "excluded record cannot merge provenance"),
+    "excluded_stale_record_does_not_demote": ("Excluded records", "excluded stale record cannot demote"),
+    "theta_string_malformed": ("Malformed input", "theta given as a string, with registry"),
+    "theta_string_malformed_no_registry": ("Malformed input", "theta given as a string, no registry"),
+    "theta_bool_malformed_no_registry": ("Malformed input", "theta given as true, no registry"),
 }
-VERSION = "v0.6.0"  # must match VERIFIER_TAG in the Makefile
+VERSION = "v0.7.0"  # must match VERIFIER_TAG in the Makefile
 
 
 def verifier_vectors() -> dict:

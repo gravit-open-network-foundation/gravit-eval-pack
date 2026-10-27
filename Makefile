@@ -1,5 +1,5 @@
 # One command: `make eval` (or `docker build -t gravit-eval . && docker run --rm gravit-eval`)
-VERIFIER_TAG := v0.6.0
+VERIFIER_TAG := v0.7.0
 GROVER_REF   := 4ad9e5ca1c53548ccaefb91647905ad8945c0da1
 # First interpreter >= 3.10 found (macOS ships python3 3.9); override with `make eval PYTHON=...`.
 PYTHON ?= $(firstword $(foreach p,python3 python3.13 python3.12 python3.11 python3.10,$(if $(shell $(p) -c 'import sys; print(sys.version_info >= (3, 10))' 2>/dev/null | grep True),$(p))) python3)
